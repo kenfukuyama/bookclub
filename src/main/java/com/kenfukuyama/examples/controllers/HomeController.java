@@ -67,6 +67,7 @@ public class HomeController {
     	User user = userService.register(newUser, result);
     	
     	
+    
     	// the result has binded to the newUser, so you don't need
     	// to direclty castch the result
         if(result.hasErrors()) {

@@ -29,7 +29,7 @@ public class UserService {
     	// Return null if result has errors
     	Optional<User> potentialUser = userRepo.findByEmail(newUser.getEmail());
     	if (potentialUser.isPresent()) {
-    		result.rejectValue("email", "exists", "Email is taken");
+    		result.rejectValue("email", "Exists", "Email is taken");
     		return null;
     	}
     	
@@ -39,7 +39,11 @@ public class UserService {
     	    return null;
     	}
     	
-        
+    	// you need this to catch any existing errors for creating models
+    	
+        if(result.hasErrors()) {
+        	return null;
+        }
     
         // Hash and set password, save user to database
     	String hashed = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
@@ -64,7 +68,7 @@ public class UserService {
     	} else {
     		// the user is present, noiw we will check the passoword
     		
-            // Reject if BCrypt password match fails
+            // Reject if BCrypt password match fails3
     		User user = potentialUser.get(); 
     		if(!BCrypt.checkpw(newLoginObject.getPassword(), user.getPassword())) {
         	    result.rejectValue("password", "Matches", "Wrong Password!");

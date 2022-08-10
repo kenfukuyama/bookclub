@@ -63,6 +63,7 @@ import="java.util.Date" %>
             </tbody>
         </table>
 
+    </div>
 
 
 </body>
